@@ -42,87 +42,16 @@
 
     <!-- DASHBOARD -->
     <main id="dashboard" class="hidden">
-      <div class="tabs main-tabs">
-        <button class="tab active" data-main-tab="users">👥 Usuários</button>
-        <button class="tab" data-main-tab="inventory">📦 Estoque</button>
-      </div>
-
-      <div id="users-section" class="grid">
-        <!-- USUÁRIOS -->
-        <section class="card full-width">
-          <h2>👥 Usuários</h2>
-          <div class="form-inline">
-            <input type="text" id="new-user" placeholder="Novo usuário">
-            <input type="email" id="new-email" placeholder="E-mail">
-            <button onclick="users.add()">Adicionar</button>
-          </div>
-          <table>
-            <thead>
-              <tr><th>ID</th><th>Usuário</th><th>E-mail</th><th>Criado</th><th>Ações</th></tr>
-            </thead>
-            <tbody id="users-table"></tbody>
-          </table>
-        </section>
-
-        <!-- SIMULAÇÃO -->
-        <section class="card full-width">
-          <h2>⚠️ Simulação de Incidentes</h2>
-          <div class="sim-grid">
-            <button class="btn warning" onclick="simulation.run('error')">💥 Erro Aleatório (50% 500)</button>
-            <button class="btn secondary" onclick="simulation.run('cpu')">🔥 CPU Spike (2s)</button>
-            <button class="btn secondary" onclick="simulation.run('delay')">⏱️ Delay (5s)</button>
-          </div>
-          <div class="log-panel" id="sim-log"></div>
-        </section>
-
-        <!-- MÉTRICAS -->
-        <section class="card">
-          <h2>📊 Métricas</h2>
-          <button onclick="window.open('/metrics', '_blank')">Ver /metrics</button>
-          <p class="hint">Prometheus coleta automaticamente em <code>/metrics</code></p>
-        </section>
-
-        <!-- LOGS -->
-        <section class="card">
-          <h2>📝 Logs</h2>
-          <button onclick="logs.refresh()">Atualizar Logs</button>
-          <div class="log-panel" id="app-log">Clique em "Atualizar Logs"...</div>
-        </section>
-      </div>
-
-      <div id="inventory-section" class="grid hidden">
-        <!-- RESUMO -->
-        <section class="card full-width">
-          <h2>📊 Resumo de Estoque</h2>
-          <div class="summary-grid">
-            <div class="summary-item">
-              <span class="label">Total Produtos:</span>
-              <span id="sum-total-products" class="value">-</span>
-            </div>
-            <div class="summary-item alert">
-              <span class="label">Estoque Baixo:</span>
-              <span id="sum-low-stock" class="value">-</span>
-            </div>
-            <div class="summary-item">
-              <span class="label">Vendas (Hoje/Mês):</span>
-              <span id="sum-sales" class="value">-</span>
-            </div>
-            <div class="summary-item">
-              <span class="label">Compras (Hoje/Mês):</span>
-              <span id="sum-purchases" class="value">-</span>
-            </div>
-          </div>
-        </section>
-
+      <div class="grid">
         <!-- PRODUTOS -->
         <section class="card full-width">
-          <h2>🍎 Produtos</h2>
+          <h2>🍎 Estoque de Alimentos</h2>
           <div class="form-inline">
-            <input type="text" id="prod-name" placeholder="Nome">
-            <input type="text" id="prod-cat" placeholder="Categoria" style="width: 100px;">
-            <input type="text" id="prod-unit" placeholder="Unid" style="width: 60px;">
-            <input type="number" id="prod-stock" placeholder="Estoque" style="width: 80px;">
-            <input type="number" id="prod-min" placeholder="Mínimo" style="width: 80px;">
+            <input type="text" id="prod-name" placeholder="Nome do Produto">
+            <input type="text" id="prod-cat" placeholder="Categoria" style="width: 120px;">
+            <input type="text" id="prod-unit" placeholder="Unid." style="width: 80px;">
+            <input type="number" id="prod-stock" placeholder="Estoque Inicial" style="width: 100px;">
+            <input type="number" id="prod-min" placeholder="Estoque Mín." style="width: 100px;">
             <button onclick="inventory.addProduct()">Adicionar</button>
           </div>
           <table>
@@ -135,10 +64,10 @@
 
         <!-- MOVIMENTAÇÕES -->
         <section class="card">
-          <h2>🛒 Nova Compra/Venda</h2>
+          <h2>🛒 Entrada/Saída</h2>
           <div class="form-stacked">
             <label>Produto:</label>
-            <select id="mov-product"></select>
+            <select id="mov-product" style="width: 100%; padding: 8px; margin-bottom: 12px; background: #0f172a; color: white; border-radius: 4px;"></select>
             <label>Quantidade:</label>
             <input type="number" id="mov-qty" value="1">
             <div class="sim-grid">
@@ -150,7 +79,7 @@
 
         <!-- HISTÓRICO -->
         <section class="card">
-          <h2>⏳ Histórico Recente</h2>
+          <h2>⏳ Histórico</h2>
           <div class="log-panel" id="inventory-history">
             Selecione um produto para ver o histórico...
           </div>
